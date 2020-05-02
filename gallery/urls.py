@@ -14,9 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from django.conf.urls.static import static
 from django.conf import settings
+from api.Views import PictureList,PictureView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path("album/<str:name>/pictures", PictureList.as_view()),
+                  re_path(r"^picture/(?P<id>[0-9 abcdef]{8})/?$", PictureView.as_view()),
+              ]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
