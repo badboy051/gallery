@@ -19,11 +19,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 from api.Views import PictureList, PictureView, AlbumView, AlbumList, Register
 from rest_framework_jwt.views import obtain_jwt_token,verify_jwt_token
-from gallery.views import home_view, signup_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', signup_view),
     path("login", obtain_jwt_token),
     path("verify", verify_jwt_token),
     path('register', Register.as_view()),
