@@ -23,7 +23,13 @@ SECRET_KEY = 'iwyi-1lsh8j$64k4%%*gk26u$lh1=+zfjw7x)t*6xlx&gy()1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
-
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost',
+    'http://stadiumticket.ir',
+)
+CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -35,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     "rest_framework",
     'api',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
