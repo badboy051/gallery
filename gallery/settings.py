@@ -23,6 +23,7 @@ SECRET_KEY = 'iwyi-1lsh8j$64k4%%*gk26u$lh1=+zfjw7x)t*6xlx&gy()1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
+
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://localhost:8000',
@@ -30,7 +31,11 @@ CORS_ORIGIN_WHITELIST = (
     'http://stadiumticket.ir',
 )
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "stadiumticket.ir"
+]
 
 # Application definition
 
