@@ -14,15 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
+from api.Views import PictureList, PictureView, AlbumView, AlbumList, Register
+from rest_framework_jwt.views import obtain_jwt_token,verify_jwt_token
 from gallery.views import home_view, signup_view
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name="home"),
-    path('signup/', signup_view)
+    path('signup/', signup_view),
+    path("login", obtain_jwt_token),
+    path("verify", verify_jwt_token),
+    path('register', Register.as_view()),
+    path("albums", AlbumList.as_view()),
+    path("album/<str:name>", AlbumView.as_view()),
+    path("album/<str:name>/pictures", PictureList.as_view()),
+    re_path(r"^picture/(?P<id>[0-9 abcdef]{8})/?$", PictureView.as_view()),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
