@@ -22,9 +22,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'iwyi-1lsh8j$64k4%%*gk26u$lh1=+zfjw7x)t*6xlx&gy()1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", True)
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost',
+    'http://stadiumticket.ir',
+)
+CORS_ORIGIN_ALLOW_ALL = True
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "stadiumticket.ir"
+]
 
 # Application definition
 
@@ -35,11 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     "rest_framework",
     'api',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,8 +67,7 @@ ROOT_URLCONF = 'gallery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,7 +125,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
-MEDIA_ROOT='media/'
-MEDIA_URL='/media/'
+MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'

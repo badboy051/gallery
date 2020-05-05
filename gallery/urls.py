@@ -18,16 +18,18 @@ from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 from api.Views import PictureList, PictureView, AlbumView, AlbumList, Register
-from rest_framework_jwt.views import obtain_jwt_token,verify_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("login", obtain_jwt_token),
-    path("verify", verify_jwt_token),
-    path('register', Register.as_view()),
-    path("albums", AlbumList.as_view()),
-    path("album/<str:name>", AlbumView.as_view()),
-    path("album/<str:name>/pictures", PictureList.as_view()),
-    re_path(r"^picture/(?P<id>[0-9 abcdef]{8})/?$", PictureView.as_view()),
+                  path('admin/', admin.site.urls),
+                  path("login", obtain_jwt_token),
+                  path("verify", verify_jwt_token),
+                  path('register', Register.as_view()),
+                  path("albums", AlbumList.as_view()),
+                  path("album/<str:name>", AlbumView.as_view()),
+                  path("album/<str:name>/pictures", PictureList.as_view()),
+                  re_path(r"^picture/(?P<id>[0-9 abcdef]{8})/?$", PictureView.as_view()),
 
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "api.views.handler404"
