@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'iwyi-1lsh8j$64k4%%*gk26u$lh1=+zfjw7x)t*6xlx&gy()1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG", False)
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
@@ -127,5 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = "static/"
 STATIC_URL = '/static/'
+MEDIA_ROOT = 'media/'
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
